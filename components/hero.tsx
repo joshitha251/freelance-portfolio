@@ -13,7 +13,7 @@ const easing = [0.22, 1, 0.36, 1] as const
 const socials = [
   { label: "GitHub", icon: Github, href: "https://github.com/joshitha251/" },
   { label: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/in/joshitha-b-648910357/" },
-  { label: "Dribbble", icon: Dribbble, href: "#" },
+  { label: "Dribbble", icon: Dribbble, href: "https://dribbble.com/joshitha-b" },
 ]
 
 export function Hero() {

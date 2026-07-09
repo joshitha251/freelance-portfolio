@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import emailjs from "@emailjs/browser"
 import { motion } from "motion/react"
 import {
   ArrowUpRight,
@@ -16,18 +17,33 @@ import { Reveal } from "@/components/motion-primitives"
 const socials = [
   { label: "GitHub", icon: Github, href: "https://github.com/joshitha251/" },
   { label: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/in/joshitha-b-648910357/" },
-  { label: "Instagram", icon: Instagram, href: "#" },
+  { label: "Instagram", icon: Instagram, href: "https://www.instagram.com/_j.o.s.h.i_" },
 ]
 
 export function Contact() {
   const [sent, setSent] = useState(false)
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  e.preventDefault()
+
+  const form = e.currentTarget
+
+  try {
+    await emailjs.sendForm(
+      "service_pt1qy5o",
+      "template_8ymzjbn",
+      form,
+      "AZ7-6128Ty-uIZGf7"
+    )
+
     setSent(true)
     setTimeout(() => setSent(false), 4000)
-    e.currentTarget.reset()
+    form.reset()
+  } catch (error) {
+    console.error("Email failed:", error)
+    alert("Failed to send message. Please try again.")
   }
+}
 
   return (
     <section id="contact" className="scroll-mt-24 px-4 pb-24 pt-12 sm:pb-32">
@@ -119,6 +135,8 @@ export function Contact() {
                   <a
                     key={s.label}
                     href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm transition-colors hover:bg-secondary"
                   >
                     <s.icon className="size-4" />
